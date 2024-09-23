@@ -1,5 +1,5 @@
 # Usa una imagen base de Python
-FROM python:3.12-slim
+FROM python:3.10-slim
 
 # Establecer el directorio de trabajo dentro del contenedor
 WORKDIR /app
@@ -14,7 +14,7 @@ RUN pip install -r requirements.txt
 COPY . .
 
 # Exponer el puerto que usará la API de Flask
-EXPOSE 5000
+EXPOSE 8080
 
 # Definir el comando para ejecutar la aplicación
 CMD ["python", "app.py"]
