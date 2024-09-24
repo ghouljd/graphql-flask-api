@@ -14,7 +14,7 @@ RUN pip install -r requirements.txt
 COPY . .
 
 # Exponer el puerto que usará la API de Flask
-EXPOSE 8080
+EXPOSE 5000
 
 # Definir el comando para ejecutar la aplicación
 CMD ["python", "app.py"]

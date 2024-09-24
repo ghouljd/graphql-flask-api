@@ -1,5 +1,6 @@
 import graphene
 from graphene_sqlalchemy import SQLAlchemyObjectType
+from sqlalchemy.orm import load_only
 from models import Incident, session
 
 class IncidentType(SQLAlchemyObjectType):
@@ -10,8 +11,8 @@ class Query(graphene.ObjectType):
     all_incidents = graphene.List(IncidentType)
 
     def resolve_all_incidents(self, info):
-        print("info: ", info.context)
-        query = IncidentType.get_query(info)
+        fields = [selection.name.value for selection in info.field_asts[0].selection_set.selections]
+        query = IncidentType.get_query(info).options(load_only(*fields))
         return query.all()
 
 class CreateIncident(graphene.Mutation):
